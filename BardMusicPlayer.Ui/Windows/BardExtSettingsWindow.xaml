@@ -1,0 +1,224 @@
+<Window x:Class="BardMusicPlayer.Ui.Windows.BardExtSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:control = "clr-namespace:BardMusicPlayer.Ui.Controls"
+        xmlns:Locale ="clr-namespace:BardMusicPlayer.Ui.Locales"
+        mc:Ignorable="d"
+        Title="BardExtSettingsWindow" Height="400" Width="400" ResizeMode="NoResize" WindowStyle="ToolWindow"
+        Background="{DynamicResource BackgroundBrush}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Themes/DefaultTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.Column="1">
+            <TabItem Header="ChatControl">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Songtitle grid -->
+                    <Grid Grid.Row="1" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.ColumnSpan="3" Content="Post song title:"/>
+                        <ComboBox Grid.Row="1" Grid.Column="0" x:Name="Songtitle_Chat_Type" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="50" SelectionChanged="Songtitle_Post_Type_SelectionChanged">
+                            <ComboBoxItem>say</ComboBoxItem>
+                            <ComboBoxItem>yell</ComboBoxItem>
+                            <ComboBoxItem>shout</ComboBoxItem>
+                        </ComboBox>
+                        <TextBox Grid.Row="1" Grid.Column="2" x:Name="Songtitle_Chat_Prefix" Text="♪" Width="30"  HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                        <Button Grid.Row="1" Grid.Column="4" Content="Send Title" Click="PostSongTitle_Click" ToolTip="{x:Static Locale:Language.BardExtSettings_PostSongTitle}" />
+                        <Label Grid.Row="1" Grid.Column="6" Content="AutoPost"  HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <ComboBox Grid.Row="1" Grid.Column="8" x:Name="Songtitle_Post_Type" Text="AutoPost via" HorizontalAlignment="Left" VerticalAlignment="Stretch" MinWidth="90" SelectionChanged="Songtitle_Post_Type_SelectionChanged" ToolTip="{x:Static Locale:Language.BardExtSettings_PostSongTitle_Auto}" >
+                            <ComboBoxItem>off</ComboBoxItem>
+                            <ComboBoxItem>on</ComboBoxItem>
+                        </ComboBox>
+                        <Separator Grid.Row="3" Grid.ColumnSpan="10" Grid.Column="0"/>
+                    </Grid>
+
+                    <!-- Chat grid -->
+                    <Grid Grid.Row="2" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.ColumnSpan="3" Content="Post a message in chat:"/>
+                        <Label    Grid.Row="1" Grid.Column="0" Content="Chat Type:" VerticalAlignment="Center" />
+                        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="Chat_Type" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120">
+                            <ComboBoxItem>say</ComboBoxItem>
+                            <ComboBoxItem>yell</ComboBoxItem>
+                            <ComboBoxItem>party</ComboBoxItem>
+                            <ComboBoxItem>company</ComboBoxItem>
+                            <ComboBoxItem>macro</ComboBoxItem>
+                        </ComboBox>
+
+                        <Label      Grid.Row="2" Grid.Column="0" Content="Text Message:" />
+                        <TextBox    Grid.Row="2" Grid.Column="1" x:Name="ChatInputText" KeyDown="ChatInputText_KeyDown" HorizontalScrollBarVisibility="Visible" Height="40" Width="240"/>
+                        <Separator  Grid.Row="5" Grid.ColumnSpan="8" Grid.Column="0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label    Grid.Column="0" Content="Lyrics Track Number:"/>
+                        <control:NumericUpDown Grid.Column="1" x:Name="Lyrics_TrackNr"   PreviewMouseUp="Lyrics_TrackNr_PreviewMouseUp" Value="-1"  ToolTip="{x:Static Locale:Language.BardExtSettings_LyricsTrackNumber}" />
+                    </Grid>
+                    <Grid Grid.Row="4" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label    Grid.Column="0" Content="Set Gfx to low:"/>
+                        <CheckBox Grid.Column="1" x:Name="GfxTest" Click="GfxTest_Checked" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="{x:Static Locale:Language.BardExtSettings_GFXLow}"/>
+                    </Grid>
+                    <Grid Grid.Row="5" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="74*"/>
+                            <ColumnDefinition Width="207*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1" x:Name="KillClient" Content="!Kill Client!"  Click="KillClient_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Sound-Settings">
+                <Grid Grid.Row="2" Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label    Grid.Column="0" Content="Sound On:"/>
+                        <CheckBox Grid.Column="1" x:Name="SoundOn" Click="SoundOn_Checked" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label    Grid.Column="0" Content="Master Volume"/>
+                        <Slider Grid.Column="1" Grid.ColumnSpan="3" x:Name="MasterVolume" ValueChanged="MasterVolume_ValueChanged" HorizontalAlignment="Center" VerticalAlignment="Center" Minimum="0" Maximum="100" Width="262"/>
+                    </Grid>
+                    <Grid Grid.Row="2" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label    Grid.Column="0" Content="Voice On:"/>
+                        <CheckBox Grid.Column="1" x:Name="VoiceOn" Click="VoiceOn_Checked" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Row="3" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label    Grid.Column="0" Content="Effect On:"/>
+                        <CheckBox Grid.Column="1" x:Name="EffectOn" Click="EffectOn_Checked" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="XIV Affinity">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"  Content="Character UID:"/>
+                        <Label Grid.Column="1"  x:Name="CharUUID_Label"/>
+                    </Grid>
+                    <Grid Grid.Row="1" x:Name="CPUDisplay" />
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="Save_CPU" Content="Set" Click="Save_CPU_Click"/>
+                        <Button Grid.Column="1" x:Name="Clear_CPU" Content="Clear" Click="Clear_CPU_Click"/>
+                        <Button Grid.Column="2" x:Name="Reset_CPU" Content="All Processors" Click="Reset_CPU_Click"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+
+</Window>

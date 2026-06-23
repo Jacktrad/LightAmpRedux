@@ -1,0 +1,239 @@
+<Window x:Class="BardMusicPlayer.Ui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        mc:Ignorable="d"
+        Height="650"
+        Width="1100"
+        MinHeight="430"
+        MinWidth="520"
+        WindowStyle="None"
+        AllowsTransparency="False"
+        ResizeMode="CanResize"
+        Background="{DynamicResource TitleBarWindowBackgroundBrush}"
+        StateChanged="MainWindow_StateChanged">
+
+    <!--
+        WindowChrome keeps normal edge resizing while removing the standard
+        white Windows title bar. The custom buttons remain clickable because
+        IsHitTestVisibleInChrome is enabled on each button.
+    -->
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="30"
+                            ResizeBorderThickness="6"
+                            CornerRadius="0"
+                            GlassFrameThickness="0"
+                            UseAeroCaptionButtons="False"/>
+    </shell:WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <!--
+                Safe startup defaults. MainWindow.xaml.cs replaces these
+                brushes with colors read from the selected external theme.
+            -->
+            <SolidColorBrush x:Key="TitleBarWindowBackgroundBrush"
+                             Color="#05070D"/>
+            <SolidColorBrush x:Key="TitleBarBackgroundBrush"
+                             Color="#080B12"/>
+            <SolidColorBrush x:Key="TitleBarBorderBrush"
+                             Color="#243247"/>
+            <SolidColorBrush x:Key="TitleBarTextBrush"
+                             Color="#C9D1DE"/>
+            <SolidColorBrush x:Key="TitleBarButtonHoverBrush"
+                             Color="#263247"/>
+            <SolidColorBrush x:Key="TitleBarButtonPressedBrush"
+                             Color="#39465E"/>
+            <SolidColorBrush x:Key="TitleBarCloseHoverBrush"
+                             Color="#E81123"/>
+            <SolidColorBrush x:Key="TitleBarClosePressedBrush"
+                             Color="#B50D1B"/>
+
+        <Style x:Key="WindowCaptionButtonStyle"
+               TargetType="Button">
+            <Setter Property="Width" Value="46"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground"
+                    Value="{DynamicResource TitleBarTextBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="shell:WindowChrome.IsHitTestVisibleInChrome"
+                    Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="CaptionButtonBorder"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="CaptionButtonBorder"
+                                        Property="Background"
+                                        Value="{DynamicResource TitleBarButtonHoverBrush}"/>
+                                <Setter Property="Foreground"
+                                        Value="{DynamicResource TitleBarTextBrush}"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="CaptionButtonBorder"
+                                        Property="Background"
+                                        Value="{DynamicResource TitleBarButtonPressedBrush}"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.35"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="WindowCloseButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource WindowCaptionButtonStyle}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="CaptionButtonBorder"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="CaptionButtonBorder"
+                                        Property="Background"
+                                        Value="{DynamicResource TitleBarCloseHoverBrush}"/>
+                                <Setter Property="Foreground"
+                                        Value="{DynamicResource TitleBarTextBrush}"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="CaptionButtonBorder"
+                                        Property="Background"
+                                        Value="{DynamicResource TitleBarClosePressedBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Border x:Name="WindowFrame"
+            Background="{DynamicResource TitleBarWindowBackgroundBrush}"
+            BorderBrush="{DynamicResource TitleBarBorderBrush}"
+            BorderThickness="1">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="CustomTitleBarRow"
+                               Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- CLASSIC UI CUSTOM TITLE BAR -->
+            <Border x:Name="CustomTitleBar"
+                    Grid.Row="0"
+                    Background="{DynamicResource TitleBarBackgroundBrush}"
+                    BorderBrush="{DynamicResource TitleBarBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="CustomTitleBar_MouseLeftButtonDown">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                Margin="10,0,8,0"
+                                IsHitTestVisible="False">
+
+                        <Image Width="16"
+                               Height="16"
+                               Margin="0,0,8,0"
+                               Source="{Binding RelativeSource={RelativeSource AncestorType=Window},
+                                                Path=Icon}"
+                               Stretch="Uniform"/>
+
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window},
+                                                  Path=Title}"
+                                   Foreground="{DynamicResource TitleBarTextBrush}"
+                                   FontSize="11"
+                                   VerticalAlignment="Center"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+
+                        <Button Content="—"
+                                Style="{StaticResource WindowCaptionButtonStyle}"
+                                Click="MinimizeButton_Click"
+                                ToolTip="Minimize"/>
+
+                        <Button x:Name="MaximizeRestoreButton"
+                                Content="□"
+                                Style="{StaticResource WindowCaptionButtonStyle}"
+                                Click="MaximizeRestoreButton_Click"
+                                ToolTip="Maximize"/>
+
+                        <Button Content="✕"
+                                Style="{StaticResource WindowCloseButtonStyle}"
+                                Click="CloseButton_Click"
+                                ToolTip="Close"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!--
+                The Classic UI is laid out on a stable design surface, then the
+                Viewbox uniformly scales that entire surface to the available
+                main-window size. Every nested control scales together.
+            -->
+            <Grid Grid.Row="1"
+                  x:Name="MainViewScaleContainer"
+                  ClipToBounds="True"
+                  SizeChanged="MainViewScaleContainer_SizeChanged"
+                  Background="{DynamicResource TitleBarWindowBackgroundBrush}">
+
+                <Viewbox x:Name="MainViewScaleHost"
+                         Stretch="Uniform"
+                         StretchDirection="Both"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         SnapsToDevicePixels="True"
+                         RenderOptions.BitmapScalingMode="HighQuality">
+
+                    <ContentControl x:Name="MainViewContent"
+                                    Width="1100"
+                                    Height="620"
+                                    Content="{Binding}"
+                                    HorizontalContentAlignment="Stretch"
+                                    VerticalContentAlignment="Stretch"
+                                    UseLayoutRounding="True"
+                                    SnapsToDevicePixels="True"
+                                    TextOptions.TextFormattingMode="Ideal"/>
+                </Viewbox>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,729 @@
+<UserControl x:Class="BardMusicPlayer.Ui.Controls.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BardMusicPlayer.Ui.Controls"
+             xmlns:control = "clr-namespace:BardMusicPlayer.Ui.Controls"
+             xmlns:Locale ="clr-namespace:BardMusicPlayer.Ui.Locales"
+             mc:Ignorable="d">
+    <Grid Background="Transparent">
+        <TabControl TabStripPlacement="Left"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch">
+                <TabItem Header="Orchestra">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  CanContentScroll="False"
+                                  PanningMode="VerticalFirst"
+                                  Padding="4"
+                                  Focusable="False">
+                        <Grid MinWidth="360" Margin="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <CheckBox Margin="10,0,0,0"  Grid.Row="1" x:Name="LocalOrchestraBox"       Content="Local Orchestra enabled"          Unchecked="LocalOrchestraBox_Checked"     Checked="LocalOrchestraBox_Checked"     ToolTip="{x:Static Locale:Language.Settings_Local_Orchestra}"/>
+                        <CheckBox Margin="10,0,0,0"  Grid.Row="2" x:Name="KeepTrackSettingsBox"    Content="Thymms I know what I'm doing box" Unchecked="KeepTrackSettingsBox_Checked"  Checked="KeepTrackSettingsBox_Checked"  ToolTip="{x:Static Locale:Language.Settings_Keep_Tracks}"/>
+                        <CheckBox Margin="10,0,0,0"  Grid.Row="3" x:Name="IgnoreProgchangeBox"     Content="City-Wok mode"                    Unchecked="IgnoreProgchangeBox_Checked"   Checked="IgnoreProgchangeBox_Checked"   ToolTip="{x:Static Locale:Language.Settings_Ignore_GuitarSwitching}"/>
+                        <Label    Margin="10,0,0,0"  Grid.Row="4" HorizontalAlignment="Left"       Content="Autostart"                                                                                                          ToolTip="{x:Static Locale:Language.Settings_TriggerSource}"/>
+                        <ComboBox Margin="90,0,0,0"  Grid.Row="4" x:Name="Autostart_source" SelectionChanged="Autostart_source_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"              ToolTip="{x:Static Locale:Language.Settings_TriggerSource}">
+                            <ComboBoxItem>Disabled</ComboBoxItem>
+                            <ComboBoxItem>Chat</ComboBoxItem>
+                            <ComboBoxItem>Metronome</ComboBoxItem>
+                        </ComboBox>
+                        <Label Margin="0,0,0,0"     Grid.Row="5"/>
+                        <Separator                  Grid.Row="6"/>
+                        <Label Margin="0,0,0,0"     Grid.Row="7" Content="Advanced:"/>
+                        <CheckBox Margin="10,0,0,0" Grid.Row="8" x:Name="AutoEquipBox"              Content="Debras Auto Equip Bards"          Unchecked="AutoEquipBox_Checked"          Checked="AutoEquipBox_Checked"          ToolTip="{x:Static Locale:Language.Settings_Autoequip}"/>
+                        <CheckBox Margin="10,0,0,0" Grid.Row="9" x:Name="AutoselectHostBox"         Content="Autoselect Host"                  Unchecked="AutoselectHost_Checked"        Checked="AutoselectHost_Checked"        ToolTip="{x:Static Locale:Language.Settings_Autohost}"/>
+                        <CheckBox Margin="10,0,0,0" Grid.Row="10" x:Name="AutoLoadPerformersBox"    Content="Auto load performer settings"     Unchecked="AutoLoadPerformers_Checked"    Checked="AutoLoadPerformers_Checked"    ToolTip="{x:Static Locale:Language.Settings_AutoloadPerformers}"/>
+                        <CheckBox Margin="10,0,0,0" Grid.Row="11" x:Name="LyricsLatencyBox"         Content="Sync lyrics to ensemble"          Unchecked="LyricsLatency_Checked"         Checked="LyricsLatency_Checked"         ToolTip="{x:Static Locale:Language.Settings_Sync_Lyrics}"/>
+                        <CheckBox Margin="10,0,0,0" Grid.Row="12" x:Name="StartBardIndividuallyBox" Content="Individual start"                 Unchecked="StartBardIndividually_Checked" Checked="StartBardIndividually_Checked" ToolTip="{x:Static Locale:Language.Settings_Individual_Start}"/>
+                    </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Playback">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  CanContentScroll="False"
+                                  PanningMode="VerticalFirst"
+                                  Padding="4"
+                                  Focusable="False">
+                        <Grid MinWidth="360" Margin="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <CheckBox Margin="10,0,0,0"  Grid.Row="1" x:Name="HoldNotesBox" Content="Hold notes"          Unchecked="Hold_Notes_Checked"        Checked="Hold_Notes_Checked"                            ToolTip="{x:Static Locale:Language.Settings_Hold_Notes}"/>
+                        <CheckBox Margin="10,0,0,0"  Grid.Row="2" x:Name="ForcePlaybackBox" Content="Force playback"  Unchecked="Force_Playback_Checked"    Checked="Force_Playback_Checked"                        ToolTip="{x:Static Locale:Language.Settings_Force_Playback}"/>
+                        <Label Margin="10,0,0,0"     Grid.Row="3" Content="MIDI Input device" HorizontalAlignment="Left"/>
+                        <ComboBox Margin="120,0,0,0" Grid.Row="3" x:Name="MIDI_Input_DeviceBox" ItemsSource="{Binding}"
+                    DisplayMemberPath="Value"
+                    SelectionChanged="MIDI_Input_Device_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80"                                                                  ToolTip="{x:Static Locale:Language.Settings_Midi_Input}">
+                            <ComboBoxItem>None</ComboBoxItem>
+                        </ComboBox>
+                        <CheckBox Margin="10,0,0,0"  Grid.Row="4" x:Name="LiveMidiDelay" Content="Enable note delay for live playing" Unchecked="LiveMidiDelay_Checked" Checked="LiveMidiDelay_Checked"             ToolTip="{x:Static Locale:Language.Settings_Live_Play}"/>
+                        <CheckBox Margin="10,0,0,0"  Grid.Row="5" x:Name="NoteOffsetBox" Content="Enable note offset"                 Unchecked="NoteOffsetBox_Checked" Checked="NoteOffsetBox_Checked"             ToolTip="{x:Static Locale:Language.Settings_Note_Offset}"/>
+                        <CheckBox Margin="10,0,0,0"  Grid.Row="6" x:Name="ChannelToProg" Content="Convert Channnels to Program"       Unchecked="ChannelToProg_Checked" Checked="ChannelToProg_Checked"             ToolTip="BETA"                                                />
+                    </Grid>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Header="Visualizer">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  CanContentScroll="False"
+                                  PanningMode="VerticalFirst"
+                                  Padding="6"
+                                  Focusable="False">
+                        <StackPanel MinWidth="430"
+                                    Margin="8">
+
+                            <TextBlock Text="Visualizer layout"
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,10"/>
+
+                            <CheckBox x:Name="ShowPianoRollBox"
+                                      Content="Show piano roll"
+                                      Margin="4,3"
+                                      Checked="VisualizerToggle_Changed"
+                                      Unchecked="VisualizerToggle_Changed"/>
+
+                            <CheckBox x:Name="ShowKeyboardBox"
+                                      Content="Show keyboard heatmap"
+                                      Margin="4,3"
+                                      Checked="VisualizerToggle_Changed"
+                                      Unchecked="VisualizerToggle_Changed"/>
+
+                            <Separator Margin="0,10"/>
+
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="58"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Piano-roll height"
+                                           VerticalAlignment="Center"/>
+
+                                <Slider Grid.Column="1"
+                                        x:Name="PianoRollHeightSlider"
+                                        Minimum="70"
+                                        Maximum="320"
+                                        TickFrequency="10"
+                                        IsSnapToTickEnabled="True"
+                                        ValueChanged="VisualizerSlider_ValueChanged"/>
+
+                                <TextBlock Grid.Column="2"
+                                           x:Name="PianoRollHeightValueText"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="58"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Note thickness"
+                                           VerticalAlignment="Center"/>
+
+                                <Slider Grid.Column="1"
+                                        x:Name="NoteThicknessSlider"
+                                        Minimum="2"
+                                        Maximum="12"
+                                        TickFrequency="0.5"
+                                        IsSnapToTickEnabled="True"
+                                        ValueChanged="VisualizerSlider_ValueChanged"/>
+
+                                <TextBlock Grid.Column="2"
+                                           x:Name="NoteThicknessValueText"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <Separator Margin="0,10"/>
+
+                            <CheckBox x:Name="ShowNoteNamesBox"
+                                      Content="Show note names"
+                                      Margin="4,3"
+                                      Checked="VisualizerToggle_Changed"
+                                      Unchecked="VisualizerToggle_Changed"/>
+
+                            <CheckBox x:Name="ShowBarLinesBox"
+                                      Content="Show measure/bar lines"
+                                      Margin="4,3"
+                                      Checked="VisualizerToggle_Changed"
+                                      Unchecked="VisualizerToggle_Changed"/>
+
+                            <CheckBox x:Name="ShowBeatLinesBox"
+                                      Content="Show beat lines"
+                                      Margin="4,3"
+                                      Checked="VisualizerToggle_Changed"
+                                      Unchecked="VisualizerToggle_Changed"/>
+
+                            <Grid Margin="4,8,4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175"/>
+                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Tracks displayed"
+                                           VerticalAlignment="Center"/>
+
+                                <ComboBox Grid.Column="1"
+                                          x:Name="VisualizerTrackModeComboBox"
+                                          SelectionChanged="VisualizerTrackMode_SelectionChanged">
+                                    <ComboBoxItem Content="All tracks"/>
+                                    <ComboBoxItem Content="Selected track only"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Button Content="Reset Visualizer to Default"
+                                    Width="210"
+                                    HorizontalAlignment="Left"
+                                    Margin="4,16,0,0"
+                                    Click="ResetVisualizerButton_Click"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Header="OBS">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  CanContentScroll="False"
+                                  PanningMode="VerticalFirst"
+                                  Padding="6"
+                                  Focusable="False">
+                        <StackPanel MinWidth="470"
+                                    Margin="8">
+
+                            <TextBlock Text="OBS text output"
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,8"/>
+
+                            <TextBlock Text="Creates text files that can be used by OBS Text sources with Read from file enabled."
+                                       TextWrapping="Wrap"
+                                       Foreground="{DynamicResource TextMutedBrush}"
+                                       Margin="0,0,0,10"/>
+
+                            <CheckBox x:Name="ObsOutputEnabledBox"
+                                      Content="Enable OBS output"
+                                      Margin="4,3"
+                                      Checked="ObsOutputEnabled_Changed"
+                                      Unchecked="ObsOutputEnabled_Changed"/>
+
+                            <Separator Margin="0,10"/>
+
+                            <TextBlock Text="Output folder"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,5"/>
+
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox x:Name="ObsOutputFolderBox"
+                                         Height="27"
+                                         IsReadOnly="True"
+                                         VerticalContentAlignment="Center"
+                                         ToolTip="NowPlaying.txt and SongHistory.txt are written here"/>
+
+                                <Button Grid.Column="1"
+                                        Content="Browse..."
+                                        MinWidth="78"
+                                        Margin="6,0,4,0"
+                                        Click="ObsOutputFolderBrowse_Click"/>
+
+                                <Button Grid.Column="2"
+                                        Content="Open"
+                                        MinWidth="58"
+                                        Click="ObsOutputFolderOpen_Click"/>
+                            </Grid>
+
+                            <TextBlock x:Name="ObsFileNamesText"
+                                       Text="Files: NowPlaying.txt and SongHistory.txt"
+                                       Foreground="{DynamicResource TextMutedBrush}"
+                                       Margin="4,2,4,10"/>
+
+                            <Separator Margin="0,6"/>
+
+                            <TextBlock Text="Now Playing"
+                                       FontWeight="SemiBold"
+                                       Margin="0,3,0,5"/>
+
+                            <TextBlock Text="Format"
+                                       Margin="4,2"/>
+
+                            <TextBox x:Name="ObsNowPlayingTemplateBox"
+                                     Margin="4,0,4,3"
+                                     Height="28"
+                                     VerticalContentAlignment="Center"
+                                     TextChanged="ObsTemplate_TextChanged"/>
+
+                            <TextBlock Text="Tokens: {song}  {instrument}  {track}  {elapsed}  {duration}  {rating}  {tags}"
+                                       TextWrapping="Wrap"
+                                       Foreground="{DynamicResource TextMutedBrush}"
+                                       Margin="4,2,4,10"/>
+
+                            <CheckBox x:Name="ObsClearNowPlayingOnStopBox"
+                                      Content="Clear NowPlaying.txt when playback stops"
+                                      Margin="4,3"
+                                      Checked="ObsOption_Changed"
+                                      Unchecked="ObsOption_Changed"/>
+
+                            <Separator Margin="0,10"/>
+
+                            <TextBlock Text="Song History"
+                                       FontWeight="SemiBold"
+                                       Margin="0,3,0,5"/>
+
+                            <TextBlock Text="History line format"
+                                       Margin="4,2"/>
+
+                            <TextBox x:Name="ObsHistoryTemplateBox"
+                                     Margin="4,0,4,3"
+                                     Height="28"
+                                     VerticalContentAlignment="Center"
+                                     TextChanged="ObsTemplate_TextChanged"/>
+
+                            <CheckBox x:Name="ObsHistoryTimestampBox"
+                                      Content="Show local time before each history entry"
+                                      Margin="4,6,4,3"
+                                      Checked="ObsOption_Changed"
+                                      Unchecked="ObsOption_Changed"/>
+
+                            <Grid Margin="4,6,4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="54"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="History entries"
+                                           VerticalAlignment="Center"/>
+
+                                <Slider Grid.Column="1"
+                                        x:Name="ObsHistoryLengthSlider"
+                                        Minimum="1"
+                                        Maximum="20"
+                                        TickFrequency="1"
+                                        IsSnapToTickEnabled="True"
+                                        ValueChanged="ObsHistoryLength_ValueChanged"/>
+
+                                <TextBlock Grid.Column="2"
+                                           x:Name="ObsHistoryLengthValueText"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <WrapPanel Margin="4,14,0,0">
+                                <Button Content="Refresh Files"
+                                        Width="108"
+                                        Margin="0,0,6,4"
+                                        Click="ObsRefreshFiles_Click"/>
+
+                                <Button Content="Write Test Files"
+                                        Width="118"
+                                        Margin="0,0,6,4"
+                                        Click="ObsWriteTestFiles_Click"/>
+
+                                <Button Content="Clear History"
+                                        Width="104"
+                                        Margin="0,0,6,4"
+                                        Click="ObsClearHistory_Click"/>
+
+                                <Button Content="Reset OBS Defaults"
+                                        Width="132"
+                                        Margin="0,0,6,4"
+                                        Click="ObsResetDefaults_Click"/>
+                            </WrapPanel>
+
+                            <Border Margin="4,12,4,0"
+                                    Padding="10"
+                                    CornerRadius="7"
+                                    Background="{DynamicResource ControlElementBrush}"
+                                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                                    BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock Text="OBS setup"
+                                               FontWeight="SemiBold"
+                                               Margin="0,0,0,5"/>
+                                    <TextBlock Text="Add a Text (GDI+) source in OBS, enable Read from file, then select NowPlaying.txt or SongHistory.txt from the output folder."
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource TextMutedBrush}"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="BMP Api">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  CanContentScroll="False"
+                                  PanningMode="VerticalFirst"
+                                  Padding="4"
+                                  Focusable="False">
+                        <Grid MinWidth="360" Margin="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Margin="0,0,0,0"      Grid.Row="1" Content="Bard Music Players API:"/>
+                        <Grid Margin="0,0,0,0"       Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="250"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Margin="0,0,0,0"      Grid.Column="0" Content="Api Key:"/>
+                            <TextBox x:Name="BMPApiKey"  Grid.Column="1" Text="INSERT-API-KEY-HERE"  VerticalAlignment="Center" TextChanged="BMPApiKey_TextChanged"/>
+                            <ToggleButton x:Name="ApiBtnToggleShow" Grid.Column="2" Height="20" Checked="ApiBtnToggleShow_Checked" Unchecked="ApiBtnToggleShow_Checked">
+                                <TextBlock x:Name="TxtButtonContent" Text="👁"/>
+                            </ToggleButton>
+                        </Grid>
+                    </Grid>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Misc">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  CanContentScroll="False"
+                                  PanningMode="VerticalFirst"
+                                  Padding="6"
+                                  Focusable="False">
+                        <StackPanel MinWidth="470"
+                                    Margin="8">
+
+                            <CheckBox x:Name="AMPInFrontBox"
+                                      Content="Bring LA to front"
+                                      Margin="4,3"
+                                      Checked="AMPInFrontBox_Checked"
+                                      Unchecked="AMPInFrontBox_Checked"
+                                      ToolTip="{x:Static Locale:Language.Settings_AmpFront}"/>
+
+                            <CheckBox x:Name="MultiBox_Box"
+                                      Content="Enable Multibox"
+                                      Margin="4,3"
+                                      Checked="MultiBox_Checked"
+                                      Unchecked="MultiBox_Checked"
+                                      ToolTip="{x:Static Locale:Language.Settings_Multibox}"/>
+
+                            <CheckBox x:Name="AutoequipDalamud"
+                                      Content="Liath Equip Mode"
+                                      Margin="4,3"
+                                      Checked="AutoequipDalamud_Checked"
+                                      Unchecked="AutoequipDalamud_Checked"
+                                      ToolTip="{x:Static Locale:Language.Settings_Autoequip}"/>
+
+                            <CheckBox x:Name="AutoAcceptInvite"
+                                      Content="Auto accept party invite"
+                                      Margin="4,3"
+                                      Checked="AutoAcceptInvite_Checked"
+                                      Unchecked="AutoAcceptInvite_Checked"
+                                      ToolTip="{x:Static Locale:Language.Settings_AutoAcceptInvite}"/>
+
+                            <CheckBox x:Name="EnableSynthLimit"
+                                      Content="Enable voice limit in preview"
+                                      Margin="4,3"
+                                      Checked="EnableSynthLimit_Checked"
+                                      Unchecked="EnableSynthLimit_Checked"
+                                      ToolTip="{x:Static Locale:Language.Settings_EnableSynthLimit}"/>
+
+                            <Separator Margin="0,10"/>
+
+                            <TextBlock Text="Advanced"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,6"/>
+
+                            <CheckBox x:Name="MidiBardComp"
+                                      Content="Enable MidiBard Compat."
+                                      Margin="4,3"
+                                      Checked="MidiBard_Checked"
+                                      Unchecked="MidiBard_Checked"
+                                      ToolTip="{x:Static Locale:Language.Settings_MidiBard}"/>
+
+                            <CheckBox x:Name="SongHistoryBox"
+                                      Content="Enable Song History"
+                                      Margin="4,3"
+                                      Checked="SongHistoryBox_Checked"
+                                      Unchecked="SongHistoryBox_Checked"/>
+
+                            <Separator Margin="0,12"/>
+
+                            <TextBlock Text="Theme"
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,8"/>
+
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       Content="Theme:"
+                                       Padding="0"
+                                       VerticalContentAlignment="Center"
+                                       ToolTip="{x:Static Locale:Language.Settings_Use_Skin}"/>
+
+                                <ComboBox Grid.Column="1"
+                                          x:Name="ThemeComboBox"
+                                          MinWidth="240"
+                                          Margin="0,0,6,0"
+                                          SelectionChanged="ThemeComboBox_SelectionChanged"
+                                          ToolTip="Select a XAML theme from the configured folder"/>
+
+                                <Button Grid.Column="2"
+                                        x:Name="ThemeFolderBrowseButton"
+                                        Content="Browse..."
+                                        MinWidth="76"
+                                        Margin="0,0,4,0"
+                                        Click="ThemeFolderBrowseButton_Click"
+                                        ToolTip="Choose the folder containing your XAML themes"/>
+
+                                <Button Grid.Column="3"
+                                        x:Name="ThemeRefreshButton"
+                                        Content="↻"
+                                        Width="30"
+                                        Click="ThemeRefreshButton_Click"
+                                        ToolTip="Refresh the theme list"/>
+                            </Grid>
+
+                            <TextBox x:Name="ThemeFolderBox"
+                                     Margin="74,2,4,8"
+                                     Height="24"
+                                     IsReadOnly="True"
+                                     IsTabStop="False"
+                                     VerticalContentAlignment="Center"
+                                     ToolTip="Folder scanned for XAML theme files"/>
+
+                            <TextBlock Text="Theme overrides"
+                                       FontWeight="SemiBold"
+                                       Margin="0,8,0,7"/>
+
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175"/>
+                                    <ColumnDefinition Width="42"/>
+                                    <ColumnDefinition Width="110"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Accent color"
+                                           VerticalAlignment="Center"/>
+
+                                <Border Grid.Column="1"
+                                        x:Name="AccentColorPreview"
+                                        Width="30"
+                                        Height="22"
+                                        CornerRadius="5"
+                                        BorderBrush="{DynamicResource TextMutedBrush}"
+                                        BorderThickness="1"
+                                        VerticalAlignment="Center"/>
+
+                                <TextBox Grid.Column="2"
+                                         x:Name="AccentColorTextBox"
+                                         Margin="6,0"
+                                         IsReadOnly="True"
+                                         VerticalContentAlignment="Center"/>
+
+                                <Button Grid.Column="3"
+                                        Content="Pick..."
+                                        Width="76"
+                                        HorizontalAlignment="Left"
+                                        Click="AccentColorButton_Click"/>
+                            </Grid>
+
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="65"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Glow strength"
+                                           VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1"
+                                        x:Name="GlowStrengthSlider"
+                                        Minimum="0"
+                                        Maximum="2"
+                                        TickFrequency="0.1"
+                                        IsSnapToTickEnabled="True"
+                                        ValueChanged="ThemeOverrideSlider_ValueChanged"/>
+                                <TextBlock Grid.Column="2"
+                                           x:Name="GlowStrengthValueText"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <CheckBox x:Name="ThemeAnimationsBox"
+                                      Content="Enable UI animations and glow effects"
+                                      Margin="4,6,4,3"
+                                      Checked="ThemeAnimationsBox_Checked"
+                                      Unchecked="ThemeAnimationsBox_Checked"/>
+
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="65"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Rounded-corner amount"
+                                           VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1"
+                                        x:Name="CornerRadiusSlider"
+                                        Minimum="0"
+                                        Maximum="24"
+                                        TickFrequency="1"
+                                        IsSnapToTickEnabled="True"
+                                        ValueChanged="ThemeOverrideSlider_ValueChanged"/>
+                                <TextBlock Grid.Column="2"
+                                           x:Name="CornerRadiusValueText"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="65"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="UI scaling"
+                                           VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1"
+                                        x:Name="UiScaleSlider"
+                                        Minimum="0.75"
+                                        Maximum="1.50"
+                                        TickFrequency="0.05"
+                                        IsSnapToTickEnabled="True"
+                                        ValueChanged="ThemeOverrideSlider_ValueChanged"/>
+                                <TextBlock Grid.Column="2"
+                                           x:Name="UiScaleValueText"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175"/>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Base font size"
+                                           VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1"
+                                          x:Name="ThemeFontSizeComboBox"
+                                          SelectionChanged="ThemeFontSizeComboBox_SelectionChanged">
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="11"/>
+                                    <ComboBoxItem Content="12"/>
+                                    <ComboBoxItem Content="13"/>
+                                    <ComboBoxItem Content="14"/>
+                                    <ComboBoxItem Content="16"/>
+                                    <ComboBoxItem Content="18"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="175"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="65"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Darken backgrounds"
+                                           VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1"
+                                        x:Name="DarkenBackgroundSlider"
+                                        Minimum="0"
+                                        Maximum="0.75"
+                                        TickFrequency="0.05"
+                                        IsSnapToTickEnabled="True"
+                                        ValueChanged="ThemeOverrideSlider_ValueChanged"/>
+                                <TextBlock Grid.Column="2"
+                                           x:Name="DarkenBackgroundValueText"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <Button Content="Reset Theme Overrides"
+                                    Width="190"
+                                    HorizontalAlignment="Left"
+                                    Margin="4,14,0,0"
+                                    Click="ResetThemeOverrides_Click"/>
+
+                            <Separator Margin="0,14,0,10"/>
+
+                            <TextBlock Text="Tools"
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,7"/>
+
+                            <TextBlock Text="Open LightAmp utilities and application information."
+                                       TextWrapping="Wrap"
+                                       Foreground="{DynamicResource TextMutedBrush}"
+                                       Margin="4,0,4,8"/>
+
+                            <WrapPanel Margin="4,0,0,4">
+                                <Button x:Name="Script_Button"
+                                        Content="Scripts"
+                                        Width="110"
+                                        Margin="0,0,7,4"
+                                        Style="{DynamicResource MockupPillButtonStyle}"
+                                        Click="Script_Button_Click"
+                                        ToolTip="{x:Static Locale:Language.Main_Script}"/>
+
+                                <Button x:Name="Info_Button"
+                                        Content="Info"
+                                        Width="110"
+                                        Margin="0,0,7,4"
+                                        Style="{DynamicResource MockupPillButtonStyle}"
+                                        Click="Info_Button_Click"
+                                        ToolTip="Show LightAmp information"/>
+                            </WrapPanel>
+
+                            <CheckBox x:Name="Sp_DalamudKeyOut"
+                                      Content="Use Dalamud Key out"
+                                      Margin="4,12,4,3"
+                                      Checked="Sp_DalamudKeyOut_Checked"
+                                      Unchecked="Sp_DalamudKeyOut_Checked"
+                                      ToolTip="{x:Static Locale:Language.Settings_Dalamud_KeyOut}"
+                                      Visibility="Hidden"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
